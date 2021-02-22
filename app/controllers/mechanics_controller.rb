@@ -3,7 +3,7 @@ class MechanicsController < ApplicationController
     @mechanics = Mechanic.all
   end
 
-  def self.average_experience
-    average(:years_of_experience)
+  def show
+    @mechanic = Mechanic.find(params[:id])
   end
 end
