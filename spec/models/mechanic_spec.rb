@@ -21,7 +21,7 @@ RSpec.describe Mechanic, type: :model do
     end
   end
   describe 'instance methods' do
-    describe "::open_rides" do
+    describe "#open_rides" do
       it "returns all rides for mechanic that are open and in descending order of thrill rating" do
         mechanic1 = Mechanic.create(name: 'Joe Bob', years_of_experience: 10)
         park1 = Park.create(name: 'Park 1', ticket_price: 50)
