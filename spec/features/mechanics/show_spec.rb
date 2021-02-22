@@ -31,18 +31,22 @@ RSpec.describe 'Mechanic Show Page' do
 
       it "I see all the rides associated with the mechanic that are open" do
         visit "/mechanics/#{@mechanic1.id}"
-        expect(page).to have_content("Current rides they’re working on:")
-        expect(page).to have_content(@ride1.name)
-        expect(page).to_not have_content(@ride2.name)
-        expect(page).to have_content(@ride3.name)
+        within ".rides" do
+          expect(page).to have_content("Current rides they’re working on:")
+          expect(page).to have_content(@ride1.name)
+          expect(page).to_not have_content(@ride2.name)
+          expect(page).to have_content(@ride3.name)
+        end
       end
 
       it "I see all the rides associated with the mechanic listed by thrill rating in descending order" do
         visit "/mechanics/#{@mechanic1.id}"
-        expect(page).to have_content("Current rides they’re working on:")
-        expect(page).to have_content(@ride1.name)
-        expect(page).to have_content(@ride3.name)
-        expect(@ride3.name).to appear_before(@ride1.name)
+        within ".rides" do
+          expect(page).to have_content("Current rides they’re working on:")
+          expect(page).to have_content(@ride1.name)
+          expect(page).to have_content(@ride3.name)
+          expect(@ride3.name).to appear_before(@ride1.name)
+        end
       end
 
       describe "I see a form to add a ride to their workload" do
@@ -50,9 +54,11 @@ RSpec.describe 'Mechanic Show Page' do
           it "I’m taken back to that mechanic's show page and I see the name of that newly added ride on this mechanics show page" do
             visit "/mechanics/#{@mechanic1.id}"
             expect(page).to have_content("Add a ride to workload:")
-            fill_in 'ride_id', with: 4
-            expect(page).to have_button("Submit")
-            click_on 'Submit'
+            within ".new-ride" do
+              fill_in 'ride_id', with: 4
+              expect(page).to have_button("Submit")
+              click_on 'Submit'
+            end
 
             expect(current_path).to eq("/mechanics/#{@mechanic1.id}")
 
