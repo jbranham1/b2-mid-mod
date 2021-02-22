@@ -24,9 +24,10 @@ RSpec.describe Mechanic, type: :model do
     describe "::open_rides" do
       it "returns all rides for mechanic that are open and in descending order of thrill rating" do
         mechanic1 = Mechanic.create(name: 'Joe Bob', years_of_experience: 10)
-        ride1 = Ride.create(name: 'The Frog Hopper', thrill_rating: 2, open: true)
-        ride2 = Ride.create(name: 'Fahrenheit', thrill_rating: 5, open: false)
-        ride3 = Ride.create(name: 'Ride', thrill_rating: 3, open: true)
+        park1 = Park.create(name: 'Park 1', ticket_price: 50)
+        ride1 = Ride.create(name: 'The Frog Hopper', thrill_rating: 2, open: true, park_id: park1.id)
+        ride2 = Ride.create(name: 'Fahrenheit', thrill_rating: 5, open: false, park_id: park1.id)
+        ride3 = Ride.create(name: 'Ride', thrill_rating: 3, open: true, park_id: park1.id)
         mechanic_ride1 = MechanicRide.create(mechanic_id: mechanic1.id, ride_id: ride1.id)
         mechanic_ride2 = MechanicRide.create(mechanic_id: mechanic1.id, ride_id: ride2.id)
         mechanic_ride3 = MechanicRide.create(mechanic_id: mechanic1.id, ride_id: ride3.id)

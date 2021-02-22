@@ -1,10 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Ride, type: :model do
+RSpec.describe Park, type: :model do
   describe 'relationships' do
-    it { should have_many :mechanic_rides }
-    it { should have_many(:mechanics).through(:mechanic_rides) }
-    it {should belong_to :park}
+    it { should have_many :rides }
   end
 
   describe 'validations' do
